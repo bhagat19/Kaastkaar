@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Kaastkaar</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_link_to_register">Not a member? Get registered with Kaastkaar now!</string>
+    <string name="btn_link_to_login">Registered Members</string>
+    <string name="btn_forgot_password">Forgot your password?</string>
+    <string name="btn_reset_password">Reset Password</string>
+    <string name="btn_back"><![CDATA[<< Back]]></string>
+    <string name="lbl_forgot_password">Forgot password?</string>
+    <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+    <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
+    <string name ="title_signup_screen">SignUp</string>
+    <string name="title_resetPassword">Reset Password</string>
+    <string name="action_register">Register</string>
+    <string name="action_sign_up">Sign up</string>
+    <string name="title_landing_page">Landing Page</string>
+    <string name="welcome_msg">Welcome</string>
+    <string name="welcome_farmer">I\'m Farmer</string>
+    <string name="welcome_retailer">I\'m Retailer</string>
+    <string name="title_welcome_screen">Welcome</string>
+    <string name="user_farmer">farmer</string>
+    <string name="user_retailer">retailer</string>
+    <string name="user_type">userType</string>
+
+
+
+
+
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_login_screen">LoginActivity</string>
+</resources>
