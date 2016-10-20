@@ -5,23 +5,50 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
     android:gravity="center">
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/item_picker"
-        android:hint="Click to pick item"/>
+        android:hint="Item name"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/quantity"
-        android:hint="Kg"/>
+        android:hint="Quantity in Kgs"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/price"
         android:hint="Rate per unit"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:id="@+id/action_done"
+        android:gravity="end"
+        android:text="POST IT"
+        android:textColor="@android:color/black"/>
 
 </LinearLayout>

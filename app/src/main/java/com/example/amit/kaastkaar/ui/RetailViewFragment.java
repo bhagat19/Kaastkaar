@@ -17,10 +17,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.amit.kaastkaar.ItemsList;
 import com.example.amit.kaastkaar.R;
+
+import java.util.List;
 
 /**
  * Created by amit on 14-10-2016.
@@ -32,6 +37,8 @@ public class RetailViewFragment extends Fragment implements RetailDialogFragment
     private boolean isConnected;
     private RecyclerView recyclerView;
     private Context mContext;
+    ItemsList itemsList;
+    List<ItemsList> listItems;
 
     public static RetailViewFragment newInstance() {
         RetailViewFragment retailViewFragment = new RetailViewFragment();
@@ -65,25 +72,12 @@ public class RetailViewFragment extends Fragment implements RetailDialogFragment
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
         recyclerView =(RecyclerView) view.findViewById(R.id.recycler_view);
-
-        RecyclerView.Adapter adapter = new RecyclerView.Adapter() {
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                return null;
-            }
-
-            @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-            }
-
-            @Override
-            public int getItemCount() {
-                return 0;
-            }
-        };
+/*
+        ItemsList list = ItemsList.createItemsList()
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(adapter);
+
+        */
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,8 +93,18 @@ public class RetailViewFragment extends Fragment implements RetailDialogFragment
     }
 
     @Override
-    public void onFinishDialog(String inputText) {
-        Toast.makeText(getActivity(), "Hi, " + inputText, Toast.LENGTH_SHORT).show();
+    public void onFinishDialog(List<ItemsList> list) {
+ //       Toast.makeText(getActivity(), "Hi, " + inputText, Toast.LENGTH_SHORT).show();
+        listItems = list;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+   //     listItems = ItemsList.createItemsList(itemsList.getItemName(),itemsList.getQuantity(),itemsList.getPrice());
+        ItemsAdapter adapter = new ItemsAdapter(mContext,listItems);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        recyclerView.setAdapter(adapter);
     }
 
     private void showDialog() {
@@ -110,6 +114,74 @@ public class RetailViewFragment extends Fragment implements RetailDialogFragment
         // SETS the target fragment for use later when sending results
         retailDialogFragment.setTargetFragment(RetailViewFragment.this, 300);
        retailDialogFragment.show(fm,"dialog");
+    }
+    public class ItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
+
+        private List<ItemsList> mItemsList;
+        private Context mContext;
+
+        public ItemsAdapter(Context context, List<ItemsList> itemsLists){
+            mItemsList = itemsLists;
+            mContext = context;
+
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            Context context = parent.getContext();
+            LayoutInflater inflater = LayoutInflater.from(context);
+
+            // Inflate the custom layout
+            View itemsView = inflater.inflate(R.layout.recyclerview_item, parent, false);
+
+            // Return a new holder instance
+            ViewHolder viewHolder = new ViewHolder(itemsView);
+            return viewHolder;
+        }
+
+        // Involves populating data into the item through holder
+        @Override
+        public void onBindViewHolder(ViewHolder viewHolder, int position) {
+            // Get the data model based on position
+            ItemsList list = mItemsList.get(position);
+
+            // Set item views based on your views and data model
+            TextView nameView = viewHolder.nameTextView;
+            nameView.setText(list.getItemName());
+            viewHolder.quantityTextView.setText(list.getQuantity());
+            viewHolder.priceTextView.setText(list.getPrice());
+
+        }
+
+        // Returns the total count of items in the list
+        @Override
+        public int getItemCount() {
+            return 1;
+        }
+
+
+    }
+
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        // Your holder should contain a member variable
+        // for any view that will be set as you render a row
+        public TextView nameTextView;
+        public TextView quantityTextView;
+        public TextView priceTextView;
+
+
+        // We also create a constructor that accepts the entire item row
+        // and does the view lookups to find each subview
+        public ViewHolder(View itemView) {
+            // Stores the itemView in a public final member variable that can be used
+            // to access the context from any ViewHolder instance.
+            super(itemView);
+
+            nameTextView = (TextView) itemView.findViewById(R.id.item_name);
+            quantityTextView = (TextView) itemView.findViewById(R.id.item_quantity);
+            priceTextView =(TextView) itemView.findViewById(R.id.item_price);
+        }
     }
 
 
