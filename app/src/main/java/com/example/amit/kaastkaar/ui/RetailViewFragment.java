@@ -39,6 +39,7 @@ public class RetailViewFragment extends Fragment implements RetailDialogFragment
     private Context mContext;
     ItemsList itemsList;
     List<ItemsList> listItems;
+    ItemsAdapter mAdapter;
 
     public static RetailViewFragment newInstance() {
         RetailViewFragment retailViewFragment = new RetailViewFragment();
@@ -96,15 +97,16 @@ public class RetailViewFragment extends Fragment implements RetailDialogFragment
     public void onFinishDialog(List<ItemsList> list) {
  //       Toast.makeText(getActivity(), "Hi, " + inputText, Toast.LENGTH_SHORT).show();
         listItems = list;
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onResume(){
         super.onResume();
    //     listItems = ItemsList.createItemsList(itemsList.getItemName(),itemsList.getQuantity(),itemsList.getPrice());
-        ItemsAdapter adapter = new ItemsAdapter(mContext,listItems);
+         mAdapter = new ItemsAdapter(mContext,listItems);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(mAdapter);
     }
 
     private void showDialog() {
