@@ -8,6 +8,7 @@ import android.database.DataSetObserver;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,7 +26,11 @@ import android.widget.Toast;
 import com.example.amit.kaastkaar.ItemsList;
 import com.example.amit.kaastkaar.R;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by amit on 14-10-2016.
@@ -37,8 +42,11 @@ public class RetailViewFragment extends Fragment implements RetailDialogFragment
     private boolean isConnected;
     private RecyclerView recyclerView;
     private Context mContext;
-    ItemsList itemsList;
-    List<ItemsList> listItems;
+//    ItemsList itemsList;
+    List<ItemsList> listItems = new ArrayList<>();
+    private static List<ItemsList> mItemsList = new ArrayList<>();
+
+
     ItemsAdapter mAdapter;
 
     public static RetailViewFragment newInstance() {
@@ -78,17 +86,14 @@ public class RetailViewFragment extends Fragment implements RetailDialogFragment
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(adapter);
 
+
         */
+
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isConnected){
-
-                    showDialog();
-
-                }
-
+                showDialog();
             }
         });
     }
@@ -97,16 +102,29 @@ public class RetailViewFragment extends Fragment implements RetailDialogFragment
     public void onFinishDialog(List<ItemsList> list) {
  //       Toast.makeText(getActivity(), "Hi, " + inputText, Toast.LENGTH_SHORT).show();
         listItems = list;
-        mAdapter.notifyDataSetChanged();
+        if (listItems.size() != 0) {
+            mAdapter = new ItemsAdapter(mContext, listItems);
+            int curSize = mAdapter.getItemCount();
+            mAdapter.notifyItemRangeChanged(curSize,1);
+      
+            recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+            recyclerView.setAdapter(mAdapter);
+        }
+
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-   //     listItems = ItemsList.createItemsList(itemsList.getItemName(),itemsList.getQuantity(),itemsList.getPrice());
-         mAdapter = new ItemsAdapter(mContext,listItems);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.setAdapter(mAdapter);
+        //     listItems = ItemsList.createItemsList(itemsList.getItemName(),itemsList.getQuantity(),itemsList.getPrice());
+   /*
+        if (listItems.size() != 0) {
+            mAdapter = new ItemsAdapter(mContext, listItems);
+            recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+            recyclerView.setAdapter(mAdapter);
+
+        }
+        */
     }
 
     private void showDialog() {
@@ -119,11 +137,12 @@ public class RetailViewFragment extends Fragment implements RetailDialogFragment
     }
     public class ItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-        private List<ItemsList> mItemsList;
+
         private Context mContext;
 
         public ItemsAdapter(Context context, List<ItemsList> itemsLists){
-            mItemsList = itemsLists;
+            int position =  mItemsList.size();
+            mItemsList.add(position, itemsLists.get(0));
             mContext = context;
 
         }
@@ -145,20 +164,22 @@ public class RetailViewFragment extends Fragment implements RetailDialogFragment
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int position) {
             // Get the data model based on position
-            ItemsList list = mItemsList.get(position);
+            if (mItemsList.size() != 0) {
+                ItemsList list = mItemsList.get(position);
 
-            // Set item views based on your views and data model
-            TextView nameView = viewHolder.nameTextView;
-            nameView.setText(list.getItemName());
-            viewHolder.quantityTextView.setText(list.getQuantity());
-            viewHolder.priceTextView.setText(list.getPrice());
+                // Set item views based on your views and data model
+                TextView nameView = viewHolder.nameTextView;
+                nameView.setText(list.getItemName());
+                viewHolder.quantityTextView.setText(list.getQuantity());
+                viewHolder.priceTextView.setText(list.getPrice());
 
+            }
         }
 
         // Returns the total count of items in the list
         @Override
         public int getItemCount() {
-            return 1;
+            return mItemsList.size();
         }
 
 

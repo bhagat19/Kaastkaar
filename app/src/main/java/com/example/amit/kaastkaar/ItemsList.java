@@ -28,7 +28,8 @@ public class ItemsList {
     }
 
  public static ArrayList<ItemsList> createItemsList(String itemName, String quantity, String price){
-     ArrayList<ItemsList> arrayList = new ArrayList<ItemsList>();
+      ArrayList<ItemsList> arrayList = new ArrayList<ItemsList>();
+
      arrayList.add(new ItemsList(itemName,quantity,price));
      return arrayList;
  }
