@@ -1,4 +1,4 @@
-package com.example.amit.kaastkaar.Login;
+package com.example.amit.kaastkaar.login;
 
 import android.content.Context;
 import android.content.Intent;

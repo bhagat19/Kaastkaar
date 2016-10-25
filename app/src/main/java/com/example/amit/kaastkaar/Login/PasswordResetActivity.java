@@ -1,4 +1,4 @@
-package com.example.amit.kaastkaar.Login;
+package com.example.amit.kaastkaar.login;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

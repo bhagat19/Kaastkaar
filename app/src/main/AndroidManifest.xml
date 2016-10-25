@@ -25,33 +25,32 @@
         </activity>
 
         <activity
-            android:name=".Login.PasswordResetActivity"
+            android:name=".login.PasswordResetActivity"
             android:label="@string/title_resetPassword"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".Login.SignUpActivity"
+            android:name=".login.SignUpActivity"
             android:label="@string/title_signup_screen"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".Login.LoginActivity"
+            android:name=".login.LoginActivity"
             android:label="@string/title_login_screen"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".Login.LandingPage"
+            android:name=".login.LandingPage"
             android:label="@string/title_landing_page"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
         </activity>
         <activity
-            android:name=".Login.WelcomeScreen"
+            android:name=".login.WelcomeScreen"
             android:label="@string/title_welcome_screen"
             android:theme="@style/AppTheme.NoActionBar">
 

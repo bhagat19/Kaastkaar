@@ -1,4 +1,4 @@
-package com.example.amit.kaastkaar.Login;
+package com.example.amit.kaastkaar.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.amit.kaastkaar.Constants;
 import com.example.amit.kaastkaar.R;
 import com.example.amit.kaastkaar.User;
 import com.example.amit.kaastkaar.ui.MainActivity;
